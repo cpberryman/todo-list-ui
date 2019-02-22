@@ -4,8 +4,8 @@
   "description": "sample to do list react app",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server"
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --hot --mode development"
   },
   "author": "Chris Berryman",
   "license": "ISC",

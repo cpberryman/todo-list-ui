@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export class AddItemForm extends React.Component {
+class AddItemForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -18,28 +18,32 @@ export class AddItemForm extends React.Component {
   }
 
   handleClick (event) {
-    this.setState({value : '', items: [this.state.value, ...this.state.items]})
+    const { items, value } = this.state;
+    this.setState({value : '', items: [value, ...items]})
     event.preventDefault()
   }
 
   deleteItem (itemToDelete) {
-    this.setState({items: this.state.items.filter(item => item !== itemToDelete)})
+    const { items } = this.state;
+    this.setState({items: items.filter(item => item !== itemToDelete)})
   }
 
   render () {
+    const { items, value } = this.state;
     return (
       <div>
         <label>
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
+          <input type="text" value={value} onChange={this.handleChange} />
         </label>
         <input
           type='button'
           value='Add To Do'
           onClick={this.handleClick}
         />
-        {this.state.items.map(item => <p key={item} onClick={() => this.deleteItem(item)}>{item}</p>)}
+        {items.map(item => <p key={item} onClick={() => this.deleteItem(item)}>{item}</p>)}
       </div>
     )
   }
-
 }
+
+export default AddItemForm;

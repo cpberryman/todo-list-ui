@@ -1,11 +1,16 @@
-var HTMLWebpackPlugin = require('html-webpack-plugin');
-var HTMLWebpackPluginConfig = new HTMLWebpackPlugin({
-	template: __dirname + '/src/main/index.html',
-	filename: 'index.html',
-	inject: 'body'
-});
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+
 module.exports = {
-	entry: __dirname + '/src/main/index.js',
+	entry: './src/index.js',
+    output: {
+      path: path.resolve('./src'),
+      filename: "main.js",
+    },
+    devServer: {
+      contentBase: './src',
+      hot: true
+    },
 	module: {
 		rules: [
 			{
@@ -17,7 +22,13 @@ module.exports = {
 	},
 	output: {
 		filename: 'app.js',
-		path: __dirname + '/src/main/built'
+		path: __dirname + '/build'
 	},
-	plugins: [HTMLWebpackPluginConfig]
+	plugins: [
+		new HTMLWebpackPlugin({
+			template: __dirname + '/src/index.html',
+			filename: 'index.html',
+			inject: 'body'
+		}),
+	]
 };
