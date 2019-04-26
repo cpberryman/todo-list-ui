@@ -20,7 +20,6 @@ class AddItemForm extends Component {
   handleClick (event) {
     const { items, value } = this.state;
     this.setState({value : '', items: [value, ...items]})
-    event.preventDefault()
   }
 
   deleteItem (itemToDelete) {
@@ -33,12 +32,13 @@ class AddItemForm extends Component {
     return (
       <div>
         <label>
-          <input type="text" value={value} onChange={this.handleChange} />
+          <input type="text" value={value} onChange={this.handleChange} className='addToDoInput' />
         </label>
         <input
           type='button'
           value='Add To Do'
           onClick={this.handleClick}
+          className='addToDoButton'
         />
         {items.map(item => <p key={item} onClick={() => this.deleteItem(item)}>{item}</p>)}
       </div>
