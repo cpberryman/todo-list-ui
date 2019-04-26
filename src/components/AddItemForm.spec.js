@@ -32,7 +32,7 @@ describe('AddItemForm', () => {
     expect(wrapper.find('p').text()).toBe(toDo)
   })
 
-  it('foo', () => {
+  it('removes the to do item when the item is clicked', () => {
     let p = wrapper.find('p')
 
     p.simulate('click')
