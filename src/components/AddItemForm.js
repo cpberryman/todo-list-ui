@@ -1,4 +1,17 @@
 import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  button: {
+    marginTop: '10px'
+  }
+})
 
 class AddItemForm extends Component {
   constructor(props) {
@@ -28,22 +41,28 @@ class AddItemForm extends Component {
   }
 
   render () {
-    const { items, value } = this.state;
+    const { items, value } = this.state
+    const { classes } = this.props
     return (
-      <div>
+      <div className={classes.root}>
+      <AppBar position='static' color='default'>
         <label>
-          <input type="text" value={value} onChange={this.handleChange} className='addToDoInput' />
+          <TextField id='addToDoInput' multiline fullWidth label='Enter task here' value={value} onChange={this.handleChange} />
         </label>
-        <input
-          type='button'
-          value='Add To Do'
+        <span>
+        <Button
+            id='addToDoButton'
+            fullWidth
+            variant='contained'
           onClick={this.handleClick}
-          className='addToDoButton'
-        />
+          className={classes.button}
+        >Add task</Button>
+        </span>
+      </AppBar>
         {items.map(item => <p key={item} onClick={() => this.deleteItem(item)}>{item}</p>)}
       </div>
     )
   }
 }
 
-export default AddItemForm;
+export default withStyles(styles) (AddItemForm)
